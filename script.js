@@ -3,8 +3,9 @@
 // ============================================
 const navbar     = document.querySelector('.navbar');
 const hamburger  = document.getElementById('hamburger');
-const navLinks   = document.getElementById('nav-links a');
-const navOverlay = document.getElementById('nav-overlay'); // null if not in HTML
+const navLinks   = document.getElementById('nav-links');        // ✅ Fix 1
+const navOverlay = document.getElementById('nav-overlay');
+const links      = document.querySelectorAll('.nav-links a');   // ✅ Fix 2 — added
 
 // ============================================
 //  Navbar Shadow on Scroll
@@ -56,8 +57,6 @@ document.addEventListener('click', (e) => {
 
 // ============================================
 //  Active Nav Link Highlight on Scroll
-//  ✅ Fixed: was navLinks.forEach (wrong!)
-//            now links = querySelectorAll (correct)
 // ============================================
 const sections = document.querySelectorAll('section[id]');
 
@@ -70,7 +69,7 @@ function highlightNav() {
     const sectionId     = section.getAttribute('id');
 
     if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-      navLinks.forEach(link => {                              // ✅ Fix
+      links.forEach(link => {                                   // ✅ Fix 2
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${sectionId}`) {
           link.classList.add('active');
@@ -84,13 +83,11 @@ window.addEventListener('scroll', highlightNav);
 
 // ============================================
 //  PHASE 3 — Hero Name Gradient
-//  Fires after fadeUp animation completes
 // ============================================
 function initHeroGradient() {
   const heroName = document.querySelector('.hero-name');
   if (!heroName) return;
 
-  // 0.4s delay + 0.7s duration + buffer = 1.3s
   setTimeout(() => {
     heroName.classList.add('animate-gradient');
   }, 1300);
@@ -98,61 +95,50 @@ function initHeroGradient() {
 
 // ============================================
 //  PHASE 3 — Auto Assign Reveal Classes
-//  No HTML changes needed!
 // ============================================
 function assignRevealClasses() {
 
-  // Section titles — fade up
   document.querySelectorAll('.section-title').forEach(el => {
     el.classList.add('reveal');
   });
 
-  // About text — fade up
   document.querySelectorAll('.about-text').forEach(el => {
     el.classList.add('reveal');
   });
 
-  // About cards — staggered fade up
   document.querySelectorAll('.about-card').forEach((el, i) => {
     el.classList.add('reveal');
     el.style.transitionDelay = `${i * 0.12}s`;
   });
 
-  // Skill categories — staggered fade up
   document.querySelectorAll('.skill-category').forEach((el, i) => {
     el.classList.add('reveal');
     el.style.transitionDelay = `${i * 0.15}s`;
   });
 
-  // Timeline items — staggered slide from left
   document.querySelectorAll('.timeline-item').forEach((el, i) => {
     el.classList.add('reveal-left');
     el.style.transitionDelay = `${i * 0.2}s`;
   });
 
-  // Project cards — staggered fade up
   document.querySelectorAll('.project-card').forEach((el, i) => {
     el.classList.add('reveal');
     el.style.transitionDelay = `${i * 0.15}s`;
   });
 
-  // Block titles (Education/Cert headings) — fade up
   document.querySelectorAll('.block-title').forEach(el => {
     el.classList.add('reveal');
   });
 
-  // Edu card — slide from left
   document.querySelectorAll('.edu-card').forEach(el => {
     el.classList.add('reveal-left');
   });
 
-  // Cert cards — staggered slide from right
   document.querySelectorAll('.cert-card').forEach((el, i) => {
     el.classList.add('reveal-right');
     el.style.transitionDelay = `${i * 0.15}s`;
   });
 
-  // Contact cards — staggered fade up
   document.querySelectorAll('.contact-card').forEach((el, i) => {
     el.classList.add('reveal');
     el.style.transitionDelay = `${i * 0.1}s`;
@@ -161,11 +147,9 @@ function assignRevealClasses() {
 
 // ============================================
 //  PHASE 3 — Skill Tags Pop-In
-//  Triggers when skill section enters viewport
 // ============================================
 function initSkillTagsAnimation() {
 
-  // Set initial hidden state
   document.querySelectorAll('.skill-tags .tag').forEach((tag, i) => {
     tag.style.opacity   = '0';
     tag.style.transform = 'scale(0.6)';
@@ -177,7 +161,6 @@ function initSkillTagsAnimation() {
     `;
   });
 
-  // Observe each skill-tags container
   const skillObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
@@ -200,7 +183,6 @@ function initSkillTagsAnimation() {
 
 // ============================================
 //  PHASE 3 — Scroll Reveal
-//  Adds .visible class when element enters viewport
 // ============================================
 function initScrollReveal() {
   const observer = new IntersectionObserver(
@@ -208,7 +190,7 @@ function initScrollReveal() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // animate once only ✅
+          observer.unobserve(entry.target);
         }
       });
     },
@@ -220,7 +202,7 @@ function initScrollReveal() {
 }
 
 // ============================================
-//  Footer Year — Dynamic
+//  Footer Year
 // ============================================
 function initFooterYear() {
   const year = document.querySelector('.footer-year');
@@ -228,12 +210,12 @@ function initFooterYear() {
 }
 
 // ============================================
-//  INIT — Run on DOM Ready
+//  INIT
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
   initFooterYear();
   initHeroGradient();
-  assignRevealClasses();  // Must run BEFORE initScrollReveal
+  assignRevealClasses();
   initScrollReveal();
   initSkillTagsAnimation();
 });
