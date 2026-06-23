@@ -840,7 +840,7 @@ img {
   border: none;
   cursor: pointer;
   padding: 4px;
-  z-index: 1200;  /* ✅ Higher than nav panel */
+  z-index: 1100;
 }
 
 .hamburger span {
@@ -858,26 +858,33 @@ img {
 }
 .hamburger.open span:nth-child(2) {
   opacity: 0;
-  transform: scaleX(0);
 }
 .hamburger.open span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ===========================
-   OVERLAY
-=========================== */
-.nav-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;              /* top/right/bottom/left all = 0 */
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-  backdrop-filter: blur(2px);
+/* Active nav link */
+.nav-links a.active {
+  color: var(--white);
+  border-bottom-color: var(--primary);
 }
 
-.nav-overlay.open {
-  display: block;
+/* ===========================
+   RESPONSIVE — LAPTOP
+   max-width: 1024px
+=========================== */
+@media (max-width: 1024px) {
+  .about-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-name {
+    font-size: 3.2rem;
+  }
 }
 
 /* ===========================
@@ -886,14 +893,13 @@ img {
 =========================== */
 @media (max-width: 768px) {
 
-  /* Show hamburger */
+  /* Navbar */
   .hamburger {
     display: flex;
   }
 
-  /* ✅ FIXED Mobile Nav Panel */
   .nav-links {
-    display: flex;              /* ✅ always flex, hidden by transform */
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -901,56 +907,32 @@ img {
     width: 260px;
     background: var(--dark-2);
     flex-direction: column;
-    justify-content: flex-start;  /* ✅ was center — caused clipping */
-    align-items: flex-start;      /* ✅ align left inside panel */
-    gap: 8px;                     /* ✅ smaller gap */
-    z-index: 1100;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    z-index: 1000;
     border-left: 1px solid var(--dark-3);
-    padding: 90px 32px 40px;      /* ✅ top padding clears navbar */
-    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
-    overflow-y: auto;             /* ✅ scroll if needed */
-
-    /* ✅ Slide in/out with transform instead of display:none */
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+    padding: 40px 24px;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.4);
   }
 
   .nav-links.open {
-    transform: translateX(0);     /* ✅ slide in */
-  }
-
-  .nav-links li {
-    width: 100%;
+    display: flex;
   }
 
   .nav-links a {
-    font-size: 1rem;
-    color: var(--text);
-    padding: 12px 0;
-    display: block;
-    width: 100%;
-    border-bottom: 1px solid var(--dark-3);  /* ✅ separator */
-    border-right: none;
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: var(--accent);
-    padding-left: 8px;
-    border-bottom-color: var(--dark-3);
-  }
-
-  .nav-links li:last-child a {
-    border-bottom: none;
+    font-size: 1.1rem;
   }
 
   /* Hero */
   .hero-name {
     font-size: 2.8rem;
   }
+
   .hero-title {
     font-size: 1.3rem;
   }
+
   .hero-subtitle {
     font-size: 1rem;
   }
@@ -969,12 +951,15 @@ img {
   .timeline::before {
     left: 8px;
   }
+
   .timeline-dot {
     left: 0;
   }
+
   .timeline-item {
     padding-left: 36px;
   }
+
   .timeline-meta {
     flex-direction: column;
     gap: 6px;
@@ -984,10 +969,12 @@ img {
   .edu-cert-wrapper {
     grid-template-columns: 1fr;
   }
+
   .edu-card-header {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .edu-right {
     align-items: flex-start;
   }
@@ -1000,5 +987,68 @@ img {
   /* Section title */
   .section-title {
     font-size: 1.7rem;
+  }
+}
+
+/* ===========================
+   RESPONSIVE — MOBILE
+   max-width: 480px
+=========================== */
+@media (max-width: 480px) {
+
+  /* Hero */
+  .hero-name {
+    font-size: 2.2rem;
+  }
+
+  .hero-title {
+    font-size: 1.1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* About */
+  .about-cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* Timeline */
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .timeline-content {
+    padding: 20px 16px;
+  }
+
+  /* Projects */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Section padding */
+  :root {
+    --section-pad: 60px 0;
+  }
+
+  /* Section title */
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
   }
 }

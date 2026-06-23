@@ -1,77 +1,69 @@
 // ============================================
-//  Elements
+//  Navbar: add shadow on scroll
 // ============================================
-const navbar     = document.querySelector('.navbar');
-const hamburger  = document.getElementById('hamburger');
-const navLinks   = document.getElementById('nav-links');
-const navOverlay = document.getElementById('nav-overlay');
+const navbar = document.querySelector('.navbar');
 
-// ============================================
-//  Navbar shadow on scroll
-// ============================================
 window.addEventListener('scroll', () => {
-  navbar.style.boxShadow = window.scrollY > 50
-    ? '0 2px 20px rgba(0,0,0,0.5)'
-    : 'none';
+  if (window.scrollY > 50) {
+    navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.5)';
+  } else {
+    navbar.style.boxShadow = 'none';
+  }
 });
 
 // ============================================
-//  Open / Close Menu
+//  Hamburger toggle
 // ============================================
-function openMenu() {
-  hamburger.classList.add('open');
-  navLinks.classList.add('open');
-  navOverlay.classList.add('open');
-  document.body.style.overflow = 'hidden'; // prevent bg scroll
-}
-
-function closeMenu() {
-  hamburger.classList.remove('open');
-  navLinks.classList.remove('open');
-  navOverlay.classList.remove('open');
-  document.body.style.overflow = '';       // restore scroll
-}
-
-// Toggle on hamburger click
 hamburger.addEventListener('click', () => {
-  navLinks.classList.contains('open') ? closeMenu() : openMenu();
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
 });
 
-// Close on overlay click
-navOverlay.addEventListener('click', closeMenu);
-
-// Close when any nav link is clicked
+// Close menu when a nav link is clicked
 navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', closeMenu);
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!navbar.contains(e.target)) {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }
 });
 
 // ============================================
-//  Active link highlight on scroll
+//  Smooth active link highlight on scroll
 // ============================================
-const sections = document.querySelectorAll('section[id]');
-const links    = document.querySelectorAll('.nav-links a');
+const sections  = document.querySelectorAll('section[id]');
+const navLinks  = document.querySelectorAll('.nav-links a');
 
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
+function highlightNav() {
+  let scrollY = window.scrollY;
 
   sections.forEach(section => {
-    const top    = section.offsetTop - 100;
-    const height = section.offsetHeight;
-    const id     = section.getAttribute('id');
+    const sectionTop    = section.offsetTop - 100;
+    const sectionHeight = section.offsetHeight;
+    const sectionId     = section.getAttribute('id');
 
-    if (scrollY >= top && scrollY < top + height) {
-      links.forEach(link => {
+    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+      navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${id}`) {
+        if (link.getAttribute('href') === `#${sectionId}`) {
           link.classList.add('active');
         }
       });
     }
   });
-});
+}
+
+window.addEventListener('scroll', highlightNav);
 
 // ============================================
-//  Dynamic footer year
+//  Set current year in footer
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
   const year = document.querySelector('.footer-year');
