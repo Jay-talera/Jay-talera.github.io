@@ -113,7 +113,6 @@ document.addEventListener('click', (e) => {
 // ============================================
 //  Active Nav Link Highlight on Scroll
 // ============================================
-const sections = document.querySelectorAll('section[id]');
 
 function highlightNav() {
   const scrollY = window.scrollY;
