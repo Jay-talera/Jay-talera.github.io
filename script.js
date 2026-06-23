@@ -41,7 +41,6 @@ document.addEventListener('click', (e) => {
 //  Smooth active link highlight on scroll
 // ============================================
 const sections  = document.querySelectorAll('section[id]');
-const navLinks  = document.querySelectorAll('.nav-links a');
 
 function highlightNav() {
   let scrollY = window.scrollY;
