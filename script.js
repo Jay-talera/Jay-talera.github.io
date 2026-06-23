@@ -3,7 +3,7 @@
 // ============================================
 const navbar     = document.querySelector('.navbar');
 const hamburger  = document.getElementById('hamburger');
-const navLinks   = document.getElementById('nav-links');
+const navLinks   = document.getElementById('nav-links a');
 const navOverlay = document.getElementById('nav-overlay'); // null if not in HTML
 
 // ============================================
@@ -60,7 +60,6 @@ document.addEventListener('click', (e) => {
 //            now links = querySelectorAll (correct)
 // ============================================
 const sections = document.querySelectorAll('section[id]');
-const links    = document.querySelectorAll('.nav-links a'); // ✅ Fix
 
 function highlightNav() {
   const scrollY = window.scrollY;
@@ -71,7 +70,7 @@ function highlightNav() {
     const sectionId     = section.getAttribute('id');
 
     if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-      links.forEach(link => {                              // ✅ Fix
+      navLinks.forEach(link => {                              // ✅ Fix
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${sectionId}`) {
           link.classList.add('active');
