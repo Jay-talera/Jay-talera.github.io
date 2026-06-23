@@ -95,7 +95,7 @@ window.addEventListener('scroll', highlightNav);
 
     if (savedTheme === 'light') {
       document.body.classList.add('light-mode');
-      themeIcon.classList.replace('fa-moon', 'fa-sun-bright');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
     }
 
     // Toggle on click
@@ -104,10 +104,10 @@ window.addEventListener('scroll', highlightNav);
 
       // Swap icon moon ↔ sun
       if (isLight) {
-        themeIcon.classList.replace('fa-moon', 'fa-sun-bright');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
         themeIcon.style.color = '#d97706';
       } else {
-        themeIcon.classList.replace('fa-sun-bright', 'fa-moon');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
         themeIcon.style.color = '#818cf8';
       }
 
