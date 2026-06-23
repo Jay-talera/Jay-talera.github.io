@@ -3,9 +3,64 @@
 // ============================================
 const navbar     = document.querySelector('.navbar');
 const hamburger  = document.getElementById('hamburger');
-const navLinks   = document.getElementById('nav-links');        // ✅ Fix 1
+const navLinks   = document.getElementById('nav-links');        
 const navOverlay = document.getElementById('nav-overlay');
-const links      = document.querySelectorAll('.nav-links a');   // ✅ Fix 2 — added
+const links      = document.querySelectorAll('.nav-links a');   
+const sections    = document.querySelectorAll('section[id]');
+
+
+// ============================================
+  //  PHASE 5 — Preloader
+  // ============================================
+  function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+
+    // Hide preloader when page fully loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+      }, 800); // slight delay for smooth feel
+    });
+  }
+
+  // ============================================
+  //  PHASE 5 — Scroll Progress Bar
+  // ============================================
+  function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop    = window.scrollY;
+      const docHeight    = document.documentElement.scrollHeight
+                         - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      bar.style.width = `${scrollPercent}%`;
+    });
+  }
+
+  // ============================================
+  //  PHASE 5 — Back to Top Button
+  // ============================================
+  function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    // Show after scrolling 400px
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    // Smooth scroll to top on click
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
 // ============================================
 //  Navbar Shadow on Scroll
@@ -69,7 +124,7 @@ function highlightNav() {
     const sectionId     = section.getAttribute('id');
 
     if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-      links.forEach(link => {                                   // ✅ Fix 2
+      links.forEach(link => {                                   
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${sectionId}`) {
           link.classList.add('active');
@@ -80,6 +135,8 @@ function highlightNav() {
 }
 
 window.addEventListener('scroll', highlightNav);
+
+
 
 // ============================================
   //  PHASE 4 — Dark / Light Mode Toggle ✅
@@ -249,6 +306,9 @@ function initFooterYear() {
 //  INIT
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
+  initPreloader();       
+  initScrollProgress();    
+  initBackToTop();
   initThemeToggle();      
   initFooterYear();
   initHeroGradient();

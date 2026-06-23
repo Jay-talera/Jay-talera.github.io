@@ -3,7 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ✅ SEO Meta Tags -->
   <title>Jay Jain | Software Engineer</title>
+  <meta name="description"
+    content="Jay Jain — Software Engineer with 2 years of experience
+    building scalable systems with Java, Spring Boot & Microservices." />
+  <meta name="keywords"
+    content="Jay Jain, Software Engineer, Java, Spring Boot,
+    Microservices, Backend Developer, Pune" />
+  <meta name="author" content="Jay Jain" />
+
+  <!-- ✅ Open Graph (looks good when shared on LinkedIn/WhatsApp) -->
+  <meta property="og:title"       content="Jay Jain | Software Engineer" />
+  <meta property="og:description" content="Software Engineer skilled in Java,
+    Spring Boot, Microservices & Cloud-native deployments." />
+  <meta property="og:type"        content="website" />
+
+  <!-- ✅ Favicon using emoji -->
+  <link rel="icon" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+      <text y='.9em' font-size='90'>👨‍💻</text>
+    </svg>"
+  />
+
   <link rel="stylesheet" href="style.css" />
   <link
     rel="stylesheet"
@@ -11,6 +34,23 @@
   />
 </head>
 <body>
+
+  <!-- Page Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-dot"></div>
+      <div class="preloader-dot"></div>
+      <div class="preloader-dot"></div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <!-- ========== NAVBAR ========== -->
   <nav class="navbar">
