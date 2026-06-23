@@ -105,8 +105,10 @@ window.addEventListener('scroll', highlightNav);
       // Swap icon moon ↔ sun
       if (isLight) {
         themeIcon.classList.replace('fa-moon', 'fa-sun-bright');
+        themeIcon.style.color = '#d97706';
       } else {
         themeIcon.classList.replace('fa-sun-bright', 'fa-moon');
+        themeIcon.style.color = '#818cf8';
       }
 
       // Save preference
