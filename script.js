@@ -12,6 +12,30 @@ window.addEventListener('scroll', () => {
 });
 
 // ============================================
+//  Hamburger toggle
+// ============================================
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+
+// Close menu when a nav link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!navbar.contains(e.target)) {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }
+});
+
+// ============================================
 //  Smooth active link highlight on scroll
 // ============================================
 const sections  = document.querySelectorAll('section[id]');
