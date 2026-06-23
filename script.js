@@ -82,6 +82,40 @@ function highlightNav() {
 window.addEventListener('scroll', highlightNav);
 
 // ============================================
+  //  PHASE 4 — Dark / Light Mode Toggle ✅
+  // ============================================
+  function initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon   = document.getElementById('theme-icon');
+
+    if (!themeToggle) return;
+
+    // Load saved preference from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Toggle on click
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light-mode');
+
+      // Swap icon moon ↔ sun
+      if (isLight) {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+      } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+      }
+
+      // Save preference
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  }
+
+
+// ============================================
 //  PHASE 3 — Hero Name Gradient
 // ============================================
 function initHeroGradient() {
@@ -213,6 +247,7 @@ function initFooterYear() {
 //  INIT
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();      
   initFooterYear();
   initHeroGradient();
   assignRevealClasses();

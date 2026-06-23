@@ -1358,3 +1358,175 @@ img {
 .about-card {
   will-change: transform, opacity;
 }
+/* ============================================
+   PHASE 4 — THEME TOGGLE BUTTON
+============================================ */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--dark-3);
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* ============================================
+   SMOOTH THEME TRANSITION
+   Applied to everything when theme switches
+============================================ */
+body,
+body *:not(.hero-name):not(.hero-greeting):not(.hero-title)
+    :not(.hero-subtitle):not(.hero-buttons):not(.hero-socials) {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease !important;
+}
+
+/* ============================================
+   LIGHT MODE — CSS Variable Overrides
+   Just overriding variables = whole site updates
+============================================ */
+body.light-mode {
+  --dark:       #f8fafc;
+  --dark-2:     #ffffff;
+  --dark-3:     #e2e8f0;
+  --text:       #475569;
+  --text-muted: #64748b;
+  --white:      #0f172a;
+}
+
+/* Navbar */
+body.light-mode .navbar {
+  background: rgba(248, 250, 252, 0.95);
+  border-bottom-color: #e2e8f0;
+}
+
+/* Hero background */
+body.light-mode .hero {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* Hero name — dark gradient in light mode */
+body.light-mode .hero-name,
+body.light-mode .hero-name.animate-gradient {
+  background: linear-gradient(
+    135deg,
+    #0f172a,
+    var(--primary),
+    var(--primary-light)
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 5s ease infinite;
+  opacity: 1;
+}
+
+/* Timeline line */
+body.light-mode .timeline::before {
+  background: #e2e8f0;
+}
+
+/* Tags */
+body.light-mode .tag {
+  background: #e2e8f0;
+  color: var(--primary);
+}
+
+body.light-mode .tag:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+/* Tech tags */
+body.light-mode .tech-tag {
+  background: rgba(10, 102, 194, 0.08);
+}
+
+/* Badges */
+body.light-mode .badge-contract {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+body.light-mode .badge-fulltime {
+  background: rgba(34, 197, 94, 0.1);
+}
+
+/* Project highlights */
+body.light-mode .project-highlights span {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* Cert icon */
+body.light-mode .cert-icon {
+  background: rgba(10, 102, 194, 0.08);
+}
+
+/* CGPA badge */
+body.light-mode .edu-cgpa {
+  background: rgba(34, 197, 94, 0.1);
+}
+
+/* Edu achievements list */
+body.light-mode .edu-achievements {
+  border-top-color: #e2e8f0;
+}
+
+/* Hamburger lines in light mode */
+body.light-mode .hamburger span {
+  background: var(--white);
+}
+
+/* Lighter shadows in light mode */
+body.light-mode .about-card:hover,
+body.light-mode .cert-card:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .project-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+body.light-mode .contact-card:hover {
+  box-shadow: 0 12px 28px rgba(10, 102, 194, 0.15);
+}
+
+body.light-mode .timeline-content:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   RESPONSIVE — Move toggle on mobile
+============================================ */
+@media (max-width: 768px) {
+  .nav-right {
+    gap: 8px;
+  }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+}
