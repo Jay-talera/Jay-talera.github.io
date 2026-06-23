@@ -2,6 +2,8 @@
 //  Navbar: add shadow on scroll
 // ============================================
 const navbar = document.querySelector('.navbar');
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
 
 window.addEventListener('scroll', () => {
   if (window.scrollY > 50) {
